@@ -5,6 +5,8 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
+var slugify = require("underscore.string/slugify");
+
 module.exports = {
 
 
@@ -20,6 +22,34 @@ module.exports = {
       required: true,
       unique: true
     }
-  }
+  },
+   beforeValidate: function(chatRoom, next){
+
+     console.log('New Record');
+     console.log(chatRoom);
+
+     var newSlug = slugify(chatRoom.title);
+
+     ChatRoom.findOne({
+       slug: newSlug
+     },function(err, record) {
+
+       if(err) return next(err);
+
+       //if a record exists
+       if(record){
+         console.log('Existing Room');
+         console.log(record);
+         return next({
+           err: ["A record already exists with the same slug: "+ record.slug]
+         });
+       }else{
+
+         chatRoom.slug = newSlug;
+       }
+
+       next();
+     });
+   }
 };
 
