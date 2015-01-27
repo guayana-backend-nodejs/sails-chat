@@ -7,10 +7,10 @@
 
 module.exports = {
 
+
+  schema: true,
+
   attributes: {
-
-    schema: true,
-
     title : {
       type: 'string',
       required: true
@@ -18,8 +18,7 @@ module.exports = {
     slug  : {
       type: 'string',
       required: true,
-      unique: true,
-      regex: '^[a-z-]+'
+      unique: true
     }
   }
 };

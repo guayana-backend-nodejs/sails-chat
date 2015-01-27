@@ -20,6 +20,6 @@ module.exports = {
   // models: {
   //   connection: 'someMongodbServer'
   // }
-    migrate: 'safe'
+    //migrate: 'safe'
 
 };
