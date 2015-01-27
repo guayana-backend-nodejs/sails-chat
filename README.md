@@ -1,3 +1,2 @@
-# chat
-
-a [Sails](http://sailsjs.org) application
+# sails-chat
+A basic chat using sails.js and socket.io
