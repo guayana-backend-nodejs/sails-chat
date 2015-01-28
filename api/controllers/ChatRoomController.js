@@ -7,6 +7,52 @@
 
 module.exports = {
 
+  render: function( req, res){
+
+    var chatSlug = req.param('chatSlug');
+
+    ChatRoom.findOne({
+      slug: chatSlug
+    }, function(err, chatRoom){
+          if (err)
+             return res.serverError({
+                err: err
+              });
+
+          if(!chatRoom){
+             return res.badRequest({
+               err: ['The ChatRoom doesn\'t exits']
+             });
+          }else{
+            console.log('Retrieving Messages');
+
+            Message.find({
+              chatRoomId: chatRoom.id
+            }, function (err, response){
+
+              if (err)
+                  return res.serverError({
+                    err: err
+                  });
+
+              if(response.count > 0){
+
+                return res.ok({
+                  status: 'success',
+                  data : response
+                });
+              }else {
+                return res.notFound({
+                  status: 'bad',
+                  message: 'no messages'
+                });
+              }
+
+            });
+
+          }
+    });
+  }
 
 };
 
