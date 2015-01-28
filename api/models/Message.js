@@ -17,7 +17,7 @@ module.exports = {
       required: true
     },
 
-    username: {
+    UserId: {
       type: 'string',
       required: true
     },

@@ -7,6 +7,10 @@
 
 module.exports = {
 
+  index: function(req, res){
+    res.view(); 
+  },
+
   render: function( req, res){
 
     var chatSlug = req.param('chatSlug');
@@ -47,6 +51,7 @@ module.exports = {
                   message: 'no messages'
                 });
               }
+
 
             });
 
