@@ -40,38 +40,69 @@ module.exports = {
 
 		}
 
-		// create user and sessions
-		User.create({username: username},function userCreated (err,user){
-			if(err) {
-				console.log(err);
-				req.session.flash = {
-					err:err
-				}
-        return res.redirect('/home/index');
-			}
+    // Validate User exits, if not create a new user.
+    async.waterfall([
+      // Find a User by username
+      function findUser(callback){
+        User.find({username: username}, function (err, user){
+          if(err){
+            return callback({
+              err: err
+            });
+          }
+          callback(null,user);
+        });
+      },
+      // Create a new user if response of the last function is null
+      function createUser(response,callback){
 
-      req.session.authenticated = true;
-			req.session.User = user;
-			console.log(req.session);
+        // If null, create a new user
+        console.log(response);
+        if(Object.keys(response).length === 0){
+            User.create({username: username},function userCreated (err,user){
+            if(err) {
+               return callback({
+                err: err
+              });
+            }
+            // authenticate user.
+            callback(null, user);
+          });  
+        }else {
+          // If response, authenticate user.
+          callback (null, response);
+        }
+           
+      }], 
 
-
-      User.watch(req.socket);
-      console.log('User with socket id '+req.socket.id+' is now subscribed to the model class \'users\'.');
-
-
-      // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
-      User.publishUpdate(user.id, {
-        loggedIn: true,
-        id: user.id,
-        name: user.name,
-        action: ' has logged in.'
+      function (err, user){
+        if(err){
+          console.log(err);
+          return;
+        }else{
+          req.session.authenticated = true;
+          req.session.User = user;
+          console.log(req.session);
+        }
       });
 
+   //    User.watch(req.socket);
+   //    console.log('User with socket id '+req.socket.id+' is now subscribed to the model class \'users\'.');
 
-      console.log(slug);
-			return res.redirect('/ChatRoom/render/'+slug);
 
-			});
+   //    // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
+   //    User.publishUpdate(user.id, {
+   //      loggedIn: true,
+   //      id: user.id,
+   //      name: user.name,
+   //      action: ' has logged in.'
+   //    });
+
+
+   //    console.log(slug);
+			// return res.redirect('/ChatRoom/render/'+slug);
+
+			// });
     },
 
 
