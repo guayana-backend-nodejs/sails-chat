@@ -12,77 +12,49 @@ module.exports = {
     	ChatRoom.find({},function (err,chatrooms){
     		if(err) return next(err);
 
-    		if(!chatrooms)return next("no hay");
+    		if(!chatrooms){
+         return res.view({
+            room: []
+          })
+        }
 
-    		// console.log(chatrooms);
-
-      		res.view({rooms:chatrooms});
+      	return	res.view({rooms:chatrooms});
     	})
     },
 
-    create: function(req,res){
+    create: function(req,res, next){
 
-      var slug =  req.param('slug');
-      var username = req.param('username');
+      var params =  req.params.all();
+      var slug = req.param('slug');
 
-    	// if username is empty
-    	if(!username){
+      UserService.findOrCreate(params, function response(err, user, created){
 
-			var usernameRequiredError = [{
-            name: 'usernameRequired',
-            message: 'You must enter a username!.'}];
+        if(err) return next(err);
 
-			req.session.flash= {
-				err: usernameRequiredError
-			}
-
-        return res.redirect('/home/index');
-
-		}
-
-		// create user and sessions
-		User.create({username: username},function userCreated (err,user){
-			if(err) {
-				console.log(err);
-				req.session.flash = {
-					err:err
-				}
-        return res.redirect('/home/index');
-			}
-
-      req.session.authenticated = true;
-			req.session.User = user;
-			console.log(req.session);
+         console.log('User has logged in');
+         User.publishCreate({
+           id: user.id,
+           loggedIn: true,
+           username: user.username,
+           action: (!created?' has logged in.':' has created and logged in.')
+         });
 
 
-      User.watch(req.socket);
-      console.log('User with socket id '+req.socket.id+' is now subscribed to the model class \'users\'.');
-
-
-      // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
-      User.publishUpdate(user.id, {
-        loggedIn: true,
-        id: user.id,
-        name: user.name,
-        action: ' has logged in.'
+      return res.redirect('/ChatRoom/render/'+slug);
       });
 
 
-      console.log(slug);
-			return res.redirect('/ChatRoom/render/'+slug);
 
-			});
     },
 
 
     subscribe: function(req, res) {
 
-      if(req.session.autheticated){
-
-        User.watch(req.socket);
-        console.log('User with socket id '+req.socket.id+' is now subscribed to the model class \'users\'.');
-
-      }
+        User.watch(req);
+        res.ok({
+          'status': 'success',
+          'message': 'User with socket id '+req.socket.id+' is now subscribed to the model class \'users\'.'
+        });
 
     }
 };

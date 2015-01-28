@@ -22,8 +22,6 @@
 // <sailsjs.org>
 
 
-
-
 // NOTE
 //
 // This example expects and/or creates the following global variables:
@@ -77,11 +75,13 @@ socket.on('connect', function socketConnected() {
     '`socket.get("/foo", function (response) { console.log(response); })`'
   );
 
-  // Subscribe to the user model classroom and instance room
-  socket.on('userLogin', function(user){
-      console.log(user);
+  socket.get('/home/subscribe/');
 
-      socket.get('/home/subscribe/'+user.username);
+  // Listen for the event called 'user' emited by the publishCreate() method.
+  socket.on('user',function(obj){
+      console.log(obj);
+      var data = obj.data;
+      console.log('User '+data.username + data.action);
   });
 
   // Attach a listener which fires every time the server publishes a message:
