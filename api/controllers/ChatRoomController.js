@@ -39,17 +39,18 @@ module.exports = {
                     err: err
                   });
 
-              if(response.count > 0){
-
-                return res.ok({
-                  status: 'success',
-                  data : response
-                });
+              if(response.count > 0){                
+                return res.view({messages: response});
+                // return res.ok({
+                //   status: 'success',
+                //   data : response
+                // });
               }else {
-                return res.notFound({
-                  status: 'bad',
-                  message: 'no messages'
-                });
+                return res.view({messages: "No messages"});
+                // return res.notFound({
+                //   status: 'bad',
+                //   message: 'no messages'
+                // });
               }
 
 
