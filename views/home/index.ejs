@@ -1,1 +1,36 @@
-<h1>chatApp</h1>
+<form id="sign-up-form" action="create" method="POST" accept-charset="utf-8">
+	<h2>Sails-Chat</h2>
+	<hr>
+	<p>A Real Time Chat using Sails JS </p>
+
+	
+	<% if(rooms) {%>
+	<select class="form-control inputChat">
+		<option value="" disabled="" selected="">Select a Room</option>
+		<% _.each(rooms, function(room){%>
+			<option value="<%=room.slug %>"><%= room.title %></option>
+		<% }) %>
+	</select>
+	<% }else{ %>
+		<input  type="text" name="title" value="" placeholder="ChatRoom" class="form-control inputChat">
+
+	<% } %>
+
+	<input type="text" name="user" value="" placeholder="Nameuser" class="form-control inputChat">
+	<input type="submit" value="Let's Go!" class="btn btn-success btn-lg inputChat">
+
+	<br>
+	<br>
+	<br>
+	<p><a href="#">Create a new Chat Room</a></p>
+
+</form>
+<div class="container">
+    <br>
+    <footer class="footer">
+	    <div class="pull-right">
+	    	<a href="http://sailsjs.com/">sails.js</a>
+	    <div>Sails-Chat by Daniel Iturriza and Ronald Suez</div>
+    </div>
+	</footer>
+</div>  
