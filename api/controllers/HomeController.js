@@ -31,6 +31,9 @@ module.exports = {
 
         if(err) return next(err);
 
+        req.session.authenticated = true;
+        req.session.User = user;
+
          console.log('User has logged in');
          User.publishCreate({
            id: user.id,
@@ -38,13 +41,12 @@ module.exports = {
            username: user.username,
            action: (!created?' has logged in.':' has created and logged in.')
          });
+        
 
+        console.log(req.session);
 
-      return res.redirect('/ChatRoom/render/'+slug);
+        return res.redirect('/ChatRoom/render/'+slug);
       });
-
-
-
     },
 
 

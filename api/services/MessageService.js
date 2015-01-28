@@ -9,7 +9,6 @@ module.exports = {
 
 function getMessages(chatSlug,callback){
 
-
   ChatRoom.findOne({
     slug: chatSlug
   }, function(err, chatRoom){
