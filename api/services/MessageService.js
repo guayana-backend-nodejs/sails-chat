@@ -23,7 +23,8 @@ function getMessages(chatSlug,callback){
         err: ['The ChatRoom doesn\'t exits']
       });
     }else{
-      console.log('Retrieving Messages');
+      console.log('Retrieving Messages from' + chatRoom.id);
+
 
       Message.find({
         chatRoomId: chatRoom.id
@@ -34,14 +35,14 @@ function getMessages(chatSlug,callback){
             err: err
           });
 
-        if(response.count > 0){
+        if(response.length > 0){
 
-          return callback({
+          return callback(null, {
             status: 'success',
             data : response
           });
         }else {
-          return callback({
+          return callback(null, {
             status: 'bad',
             message: 'no messages'
           });

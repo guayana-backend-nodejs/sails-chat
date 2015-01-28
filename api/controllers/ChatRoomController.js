@@ -16,6 +16,9 @@ module.exports = {
     var chatSlug = req.param('chatSlug');
 
     MessageService.getMessagesForChatRoom(chatSlug, function(err, messages){
+
+      console.log(messages);
+
         if (err)
           return res.view({
                 chatRoomName: chatSlug,
@@ -26,7 +29,7 @@ module.exports = {
         return res.view({
           chatRoomName: chatSlug,
           messages: messages
-        })
+        });
 
     });
   }

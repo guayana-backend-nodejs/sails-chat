@@ -55,6 +55,10 @@ module.exports = {
 			console.log(req.session);
 
 
+      User.watch(req.socket);
+      console.log('User with socket id '+req.socket.id+' is now subscribed to the model class \'users\'.');
+
+
       // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
       User.publishUpdate(user.id, {
         loggedIn: true,
@@ -63,7 +67,6 @@ module.exports = {
         action: ' has logged in.'
       });
 
-      req.socket.emit('userLogin',{user: user});
 
       console.log(slug);
 			return res.redirect('/ChatRoom/render/'+slug);
