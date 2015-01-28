@@ -11,7 +11,11 @@ module.exports = {
   	username: {
   		type: 'string',
   		required: true
-  	}
+  	},
+    isOnline:{
+      type: 'boolean',
+      defaultsTo: false
+    }
   }
 };
 

@@ -15,42 +15,72 @@ module.exports = {
     		if(!chatrooms)return next("no hay");
 
     		// console.log(chatrooms);
-      		
+
       		res.view({rooms:chatrooms});
     	})
     },
 
-    create: function(req,res,next){
+    create: function(req,res){
+
+      var slug =  req.param('slug');
+      var username = req.param('username');
 
     	// if username is empty
-    	if(!req.param('username')){
+    	if(!username){
 
-			var usernameRequiredError = [{ 	name: 'usernameRequired', 
-													message: 'You must enter a username!.'}]; 
+			var usernameRequiredError = [{
+            name: 'usernameRequired',
+            message: 'You must enter a username!.'}];
 
 			req.session.flash= {
 				err: usernameRequiredError
 			}
 
-			res.redirect('/home/index');
-			return;
+        return res.redirect('/home/index');
+
 		}
 
 		// create user and sessions
-		User.create({username: req.param('username')},function userCreated (err,user){
+		User.create({username: username},function userCreated (err,user){
 			if(err) {
-				console.log(err); 
+				console.log(err);
 				req.session.flash = {
 					err:err
 				}
-				res.redirect('/home/index');
-				return;
+        return res.redirect('/home/index');
 			}
-			req.session.authenticated = true;
+
+      req.session.authenticated = true;
 			req.session.User = user;
-			// console.log(req.session);
-			res.redirect('/ChatRoom/render/'+req.param('slug'));
+			console.log(req.session);
+
+
+      // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
+      User.publishUpdate(user.id, {
+        loggedIn: true,
+        id: user.id,
+        name: user.name,
+        action: ' has logged in.'
+      });
+
+      req.socket.emit('userLogin',{user: user});
+
+      console.log(slug);
+			return res.redirect('/ChatRoom/render/'+slug);
+
 			});
+    },
+
+
+    subscribe: function(req, res) {
+
+      if(req.session.autheticated){
+
+        User.watch(req.socket);
+        console.log('User with socket id '+req.socket.id+' is now subscribed to the model class \'users\'.');
+
+      }
+
     }
 };
 
