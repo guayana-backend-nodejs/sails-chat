@@ -1,0 +1,43 @@
+#sign-up-form {
+	max-width: 40%;
+	background-color: #CCC;
+	padding: 5%;
+	margin-left: 30%;
+	border: 1px black;
+}
+
+#sign-up-form h2{
+	text-align: center;
+	margin-top: -5%;
+	margin-bottom: -5%;
+	text-decoration: bold;
+	font-size: 60px;
+}
+
+#sign-up-form p {
+	text-align: center;
+	margin-top: -2px;
+}
+
+
+#sign-up-form .alert-success{
+	font-size: 10px;
+}
+
+#sign-up-form .inputChat {
+	border-radius: 0px;
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: -1%;
+	border: 0.5px black;
+	padding-left: 5px;
+	width: 60%;
+	margin-left: 20%;
+}
+
+#sign-up-form .btn {
+	margin-top: 1%;
+	width: 60%;
+	height: 2em;
+	margin-left: 20%;
+}
