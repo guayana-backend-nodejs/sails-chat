@@ -1,9 +1,19 @@
 <div class="navbar navbar-inverse navbar-chat">
       <div class="container">
-        <a href="/" class="navbar-brand title-chat">ChatRoom Title</a>
+        <a href="/chatroom" class="navbar-brand title-chat">ChatRoom Title</a>
       </div>
 </div>
+<div class="dashboard-chatroom">
 
-Chat
+	<% if(messages) { %>
+		<% _.each(messages, function(message){%>
+			<p> <%= message.content %> </p>
+		<% }); } %>
 
-
+</div>
+<div class= "footer-chatroom">
+	<div class="box-message">
+		<input type="text" name="text" value="" placeholder="Write your message" class="form-control text-chatroom">
+		<input type="submit" name="" value="Send" style="border-radius: 0px;" class="btn btn-success"> 	
+	</div>
+</div>

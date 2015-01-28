@@ -17,7 +17,7 @@ module.exports = {
       required: true
     },
 
-    UserId: {
+    userId: {
       type: 'string',
       required: true
     },
@@ -29,7 +29,7 @@ module.exports = {
   },
   beforeValidate: function(message, next){
 
-    var chatRoomSlug = slugify(message.chatRoom);
+    var chatRoomSlug = slugify(message.chatRoomId);
 
     ChatRoom.findOne({
       slug: chatRoomSlug

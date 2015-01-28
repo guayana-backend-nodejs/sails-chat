@@ -6,6 +6,23 @@
  */
 
 module.exports = {
+
+	create: function (req, res, next){
+
+		console.log(req.params.all());
+
+		Message.create(req.params.all(), function messageCreated(err, message){
+			if(err){
+				// console.log("error: "+ err);
+				return next(err); 
+			}
+			
+			return res.ok({
+			status: 'success',
+			message: "Message Created!!: " + message.content
+			});
+		});
+	}
 	
 };
 

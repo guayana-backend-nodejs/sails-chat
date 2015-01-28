@@ -22,10 +22,12 @@ module.exports = {
                 messages : []
               });
 
+
         return res.view({
           chatRoomName: chatSlug,
           messages: messages
         })
+
     });
   }
 
