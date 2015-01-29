@@ -61,6 +61,7 @@
 
 // Immediately start connecting
 socket = io.connect();
+
 var moment = moment();
 
 console.log(moment.format('MMMM Do YYYY, h:mm:ss a'));
@@ -98,7 +99,7 @@ socket.on('connect', function socketConnected() {
 
  socket.post('message/create', message, function mesgpost());
 
-  
+
   socket.on('disconnect', function socketDisconnet(){
 
     typeof console !== 'undefined' &&
@@ -107,4 +108,4 @@ socket.on('connect', function socketConnected() {
 });
 
 
-f
+
