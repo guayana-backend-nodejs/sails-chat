@@ -3,7 +3,8 @@
  */
 
 module.exports = {
-  getMessagesForChatRoom : getMessages
+  getMessagesForChatRoom : getMessages,
+  sendMessageToChatRoom : sendMessage
 
 }
 
@@ -53,4 +54,20 @@ function getMessages(chatSlug,callback){
     }
   });
 
+}
+
+function sendMessage(message, cb){
+  Message.create(message, function messageCreated(err, message){
+        if(err){
+          return cb(err);
+        }
+
+        var io = sails.io;
+        io.sockets.emit('message', {message: message});
+
+        return cb(null,{
+          status: 'success',
+          message: "Message Created!!: " + message.content
+        });
+      });
 }
