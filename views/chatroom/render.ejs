@@ -1,14 +1,22 @@
 <div class="navbar navbar-inverse navbar-chat">
   <div class="container">
-    <a href="/chatroom" class="navbar-brand title-chat"><%= chatRoomName %></a>
+    <a href="/chatroom" class="navbar-brand title-chat">ChatRoom Title</a>
   </div>
 </div>
-<div class="dashboard-chatroom">
+<div class="row dashboard-chatroom">
 
-  <% if(messages.data) { %>
-  <% _.each(messages.data, function(message){%>
-  <p> <%= message.content %> </p>
-  <% }); } %>
+  <div class="col-xs-4">
+    <p>Users:</p>
+  </div>
+  <div class="col-xs-8">
+    <p>Messages:</p>
+
+    <% if(messages.data) { %>
+    <% _.each(messages.data, function(message){%>
+    <p> <%= message.content %> </p>
+    <% }); } %>
+
+  </div>
 
 </div>
 <div class= "footer-chatroom">

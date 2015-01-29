@@ -13,15 +13,17 @@ module.exports = {
 
 		Message.create(req.params.all(), function messageCreated(err, message){
 			if(err){
+				// console.log("error: "+ err);
 				return next(err);
 			}
 
+      var socket = req.socket;
       var io = sails.io;
-      io.sockets.emit('message', {message: message});
 
+      io.sockets.emit('message', {message: message});
 			return res.ok({
 			status: 'success',
-			message: "Message Created!!: " + message.content
+			data: message,
 			});
 		});
 	}

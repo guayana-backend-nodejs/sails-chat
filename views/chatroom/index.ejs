@@ -3,17 +3,25 @@
         <a href="/chatroom" class="navbar-brand title-chat">ChatRoom Title</a>
       </div>
 </div>
-<div class="dashboard-chatroom">
+<div class="row dashboard-chatroom">
 
-	<% if(messages) { %>
-		<% _.each(messages, function(message){%>
-			<p> <%= message.content %> </p>
-		<% }); } %>
+  <div class="col-xs-4">
+    <p>Users:</p>
+  </div>
+  <div class="col-xs-8">
+    <p>Messages:</p>
+
+    <% if(messages) { %>
+    <% _.each(messages, function(message){%>
+    <p> <%= message.content %> </p>
+    <% }); } %>
+
+  </div>
 
 </div>
 <div class= "footer-chatroom">
 	<div class="box-message">
 		<input type="text" name="text" value="" placeholder="Write your message" class="form-control text-chatroom">
-		<input type="submit" name="" value="Send" style="border-radius: 0px;" class="btn btn-success"> 	
+		<input type="submit" name="" value="Send" style="border-radius: 0px;" class="btn btn-success">
 	</div>
 </div>
