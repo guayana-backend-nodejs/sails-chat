@@ -1,3 +1,4 @@
+
 <div class="navbar navbar-inverse navbar-chat">
   <div class="container">
     <a href="/chatroom" class="navbar-brand title-chat">ChatRoom Title</a>
@@ -28,6 +29,6 @@
 <div class= "footer-chatroom">
   <div class="box-message">
     <input type="text" name="text" value="" placeholder="Write your message" id="room-message" class="form-control text-chatroom">
-    <button type="button" name="room-message-send" id="<%= chatRoomName %>"  value="Send" style="border-radius: 0px;" class="btn btn-success" onclick="onClickSendPublicMessage(this)">Send</button>
+    <button type="button" name="room-message-send" id="<%= chatRoomName %>"  value="Send" style="border-radius: 0px;" class="btn btn-success" onclick="onClickSendPublicMessage($(this))">Send</button>
   </div>
 </div>

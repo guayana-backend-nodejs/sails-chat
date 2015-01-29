@@ -65,9 +65,6 @@ moment = moment();
 
 console.log(moment.format('hh:mm:ss'));
 
-var moment = moment();
-
-console.log(moment.format('MMMM Do YYYY, h:mm:ss a'));
 
 typeof console !== 'undefined' &&
 console.log('Connecting Socket.io to Sails.js...');
@@ -98,9 +95,6 @@ socket.on('connect', function socketConnected() {
     console.log('New message received from Sails ::\n', message);
 
   });
-
-
- socket.post('message/create', message, function mesgpost(){});
 
 
   socket.on('disconnect', function socketDisconnet(){

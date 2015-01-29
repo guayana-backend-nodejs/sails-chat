@@ -5,7 +5,7 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 var slugify = require("underscore.string/slugify");
-
+var moment = require('moment');
 module.exports = {
 
   schema: true,
@@ -25,7 +25,12 @@ module.exports = {
     content: {
       type: 'string',
       required: true
-    }
+    },
+    toJSON: function() {
+      var obj = this.toObject();
+        obj.createdAt = moment(obj.createdAt, 'HH:MM:SS');
+        return obj;
+      }
   },
   beforeValidate: function(message, next){
 
@@ -52,6 +57,7 @@ module.exports = {
 
       next();
     });
-  }
+  },
+
 };
 
