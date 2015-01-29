@@ -63,6 +63,8 @@
 socket = io.connect();
 var moment = moment();
 
+console.log(moment.format('MMMM Do YYYY, h:mm:ss a'));
+
 typeof console !== 'undefined' &&
 console.log('Connecting Socket.io to Sails.js...');
 
