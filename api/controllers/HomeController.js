@@ -24,15 +24,18 @@ module.exports = {
 
     create: function(req,res, next){
 
-      var params =  req.params.all();
+      var username =  req.param('username')
       var slug = req.param('slug');
 
-      UserService.findOrCreate(params, function response(err, user, created){
+
+      UserService.findOrCreate(username, function response(err, user, created){
 
         if(err) return next(err);
 
         req.session.authenticated = true;
         req.session.User = user;
+
+        console.log(req.session);
 
          console.log('User has logged in');
          console.log(user);
@@ -42,9 +45,6 @@ module.exports = {
            username: user.username,
            action: (!created?' has logged in.':' has created and logged in.')
          });
-        
-
-        console.log(req.session);
 
         return res.redirect('/ChatRoom/render/'+slug);
       });

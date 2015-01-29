@@ -16,18 +16,16 @@ module.exports = {
     var chatSlug = req.param('chatSlug');
 
     MessageService.getMessagesForChatRoom(chatSlug, function(err, messages){
-        if (err)
-          return res.view({
-                chatRoomName: chatSlug,
-                messages : []
-              });
-
-
+      if (err)
         return res.view({
-          chatRoomName: chatSlug,
-          messages: messages
-        });
+              chatRoomName: chatSlug,
+              messages : []
+            });
 
+      return res.view({
+        chatRoomName: chatSlug,
+        messages: messages
+      });
     });
   }
 
