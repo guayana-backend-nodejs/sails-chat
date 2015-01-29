@@ -17,29 +17,36 @@ function getUser(paramName, value, cb){
   var conditions = {};
   conditions[paramName] = value;
   User.findOne(conditions, function(err, user){
-    cb(err, user);
+
+    if(err) cb(err);
+
+    if(user){
+        cb(null, user, true);
+    }
+
+    if(!user){
+      console.log('new user');
+      User.create(conditions, function response(err, newUser){
+        if (err) {
+          cb(err);
+        }
+
+        console.log(newUser);
+        cb(err, newUser, false);
+      });
+    }
+
   });
 }
 
-function findOrCreate(params,cb){
-
-  var username = params.username;
+function findOrCreate(username,cb){
 
    async.waterfall([
      function findUser(callback){
-       getUser('username', username, function response(err, user){
-            if( err) callback(err);
+       getUser('username', username, function response(err, user, created){
+         if(err) callback(err);
 
-            if(!user){
-              console.log('Creating a new User');
-              User.create(params, function response(err, newUser){
-                    if (err) callback(err);
-
-                    callback(null, newUser, true);
-              });
-            }
-
-            callback(null, user, false);
+         callback(null, user, created);
        });
      }
    ],function(err, result, created){
