@@ -61,6 +61,9 @@
 
 // Immediately start connecting
 socket = io.connect();
+moment = moment();
+
+console.log(moment.format('hh:mm:ss'));
 
 typeof console !== 'undefined' &&
 console.log('Connecting Socket.io to Sails.js...');

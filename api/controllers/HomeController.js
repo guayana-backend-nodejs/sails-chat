@@ -35,6 +35,8 @@ module.exports = {
         req.session.authenticated = true;
         req.session.User = user;
 
+        console.log(req.session);
+
          console.log('User has logged in');
          User.publishCreate({
            id: user.id,
