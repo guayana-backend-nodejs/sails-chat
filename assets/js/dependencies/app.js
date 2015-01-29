@@ -56,7 +56,7 @@
 //    is just a Chrome-friendly shortcut for:   `function (response) {console.log(response); }`
 
 
-
+// sockeet.post('message/create', message, function (response()))
 
 
 // Immediately start connecting
@@ -95,9 +95,16 @@ socket.on('connect', function socketConnected() {
 
   });
 
+
+ socket.post('message/create', message, function mesgpost());
+
+  
   socket.on('disconnect', function socketDisconnet(){
 
     typeof console !== 'undefined' &&
     console.log('a disconnect message');
   });
 });
+
+
+f

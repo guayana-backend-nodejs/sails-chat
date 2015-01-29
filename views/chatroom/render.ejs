@@ -12,7 +12,7 @@
 </div>
 <div class= "footer-chatroom">
   <div class="box-message">
-    <input type="text" name="text" value="" placeholder="Write your message" class="form-control text-chatroom">
-    <input type="submit" name="" value="Send" style="border-radius: 0px;" class="btn btn-success">
+    <input type="text" name="text" value="" placeholder="Write your message" id="room-message" class="form-control text-chatroom">
+    <button type="button" name="room-message-send" id="<%= chatRoomName %>"  value="Send" style="border-radius: 0px;" class="btn btn-success" onclick="onClickSendPublicMessage(this)">Send</button> 
   </div>
 </div>
