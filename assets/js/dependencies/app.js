@@ -61,6 +61,7 @@
 
 // Immediately start connecting
 socket = io.connect();
+var moment = moment();
 
 typeof console !== 'undefined' &&
 console.log('Connecting Socket.io to Sails.js...');
