@@ -11,7 +11,7 @@
   <div class="col-xs-8">
     <p>Messages:</p>
 
-    <% if(messages.data) { %>
+   <!--  <% if(messages.data) { %>
     <% _.each(messages.data, function(message){%>
     <div class="row">
       <div class="col-xs-3">
@@ -21,7 +21,22 @@
         <p> <%= message.content %> </p>
       </div>
     </div>
-    <% }); } %>
+    <% }); } %> -->
+
+<!-- INSERTAR VIA JQUERY USERNAME,TIME AND CONTENT INSIDE THE ID'S -->
+    <div class="row">
+      <div class="messageBox container">
+        <div class="messageHead row">
+          <div class="messageUser col-md-6">
+            <span id="usernameMsg">Username</span> UserName - <span id="timeMsg">10:00</span>
+          </div>
+        </div>
+        <hr style="margin-top:0px;">
+        <div class="messageContent row container">
+        <span id="contentMsg">Contenido del Mensaje</span>
+        </div>
+      </div>
+    </div>
 
   </div>
 

@@ -73,8 +73,7 @@
 	color: white;
 }
 
-.box-message{
-}
+
 .footer-chatroom .text-chatroom{
 	float:left;
 	width: 80%;
@@ -82,7 +81,31 @@
 	margin-left: 6%;
 }
 
+.messageBox{
+	width: 70%;
+	height: 10%;
+	background-color: #E2E0EE;
+	border: 1px #888888 double;
+	-moz-box-shadow: 2px 1px 0px 0px #01012d;
+	-webkit-box-shadow: 2px 1px 0px 0px #01012d;
+	box-shadow: 2px 1px 0px 0px #01012d;
 
+}
+
+.messageUser{
+	display: inline;
+	border-right: 1px white solid;
+	width: 100%;
+}
+
+.messageTime{
+	display: inline;
+	text-align: right;
+}
+.messageContent {
+	height: auto;
+	width: 100%;
+}
 /*.box-rcv{
 	width: 75%;
 	margin-left: 10%;
