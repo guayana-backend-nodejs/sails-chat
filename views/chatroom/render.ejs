@@ -1,0 +1,49 @@
+
+<div class="navbar navbar-inverse navbar-chat">
+  <div class="container">
+    <a href="/chatroom" class="navbar-brand title-chat">ChatRoom Title</a>
+  </div>
+</div>
+<div class="row dashboard-chatroom">
+  <div class="col-xs-3">
+    <p>Users:</p>
+  </div>
+  <div class="col-xs-8">
+    <p>Messages:</p>
+
+   <!--  <% if(messages.data) { %>
+    <% _.each(messages.data, function(message){%>
+    <div class="row">
+      <div class="col-xs-3">
+        <span> <%= message.userId %> </span> <span> <%= message.createdAt %> </span>
+      </div>
+      <div class="col-xs-8">
+        <p> <%= message.content %> </p>
+      </div>
+    </div>
+    <% }); } %> -->
+
+<!-- INSERTAR VIA JQUERY USERNAME,TIME AND CONTENT INSIDE THE ID'S -->
+    <div class="row">
+      <div class="messageBox container">
+        <div class="messageHead row">
+          <div class="messageUser col-md-6">
+            <span id="usernameMsg">Username</span> UserName - <span id="timeMsg">10:00</span>
+          </div>
+        </div>
+        <hr style="margin-top:0px;">
+        <div class="messageContent row container">
+        <span id="contentMsg">Contenido del Mensaje</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<div class= "footer-chatroom">
+  <div class="box-message">
+    <input type="text" name="text" value="" placeholder="Write your message" id="room-message" class="form-control text-chatroom">
+    <button type="button" name="room-message-send" id="<%= chatRoomName %>"  value="Send" style="border-radius: 0px;" class="btn btn-success" onclick="onClickSendPublicMessage($(this))">Send</button>
+  </div>
+</div>

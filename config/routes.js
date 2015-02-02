@@ -32,9 +32,11 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  }
+  '/': 'HomeController.index',
+
+  'post /create': 'HomeController.create',
+  'get /ChatRoom/render/:chatSlug' : 'ChatRoomController.render',
+  'post /home/subscribe/:userName' : 'HomeRoomController.subscribe'
 
   /***************************************************************************
   *                                                                          *
