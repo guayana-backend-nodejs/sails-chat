@@ -4,8 +4,8 @@
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
-var slugify = require("underscore.string/slugify");
-var moment = require('moment');
+// var slugify = require("underscore.string/slugify");
+// var moment = require('moment');
 module.exports = {
 
   schema: true,
